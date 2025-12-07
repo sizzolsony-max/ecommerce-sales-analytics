@@ -1,8 +1,7 @@
-import os
+import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 
-# 1) CREATE SAMPLE E-COMMERCE DATA
+# ---------- 1) CREATE SAMPLE DATA ----------
 data = {
     "order_id": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     "order_date": [
@@ -25,70 +24,71 @@ data = {
 }
 
 df = pd.DataFrame(data)
-
-# Convert order_date to datetime and create Year-Month column
 df["order_date"] = pd.to_datetime(df["order_date"])
 df["year_month"] = df["order_date"].dt.to_period("M").astype(str)
-
-# Calculate revenue
 df["revenue"] = df["quantity"] * df["price_per_unit"]
 
-print("First rows of data:")
-print(df.head())
-print("\nTotal rows:", len(df))
-print("\nColumns:", df.columns.tolist())
+# ---------- 2) STREAMLIT DASHBOARD UI ----------
 
-# 2) BASIC ANALYSIS
+st.title("📊 E-commerce Sales Dashboard")
+st.write("This dashboard shows revenue trends by **month**, **country**, and **product**.")
 
-# Revenue by month
-rev_by_month = df.groupby("year_month")["revenue"].sum().reset_index()
-print("\nRevenue by Month:")
-print(rev_by_month)
+# KPIs
+total_revenue = df["revenue"].sum()
+total_orders = df["order_id"].nunique()
+total_countries = df["country"].nunique()
 
-# Revenue by country
-rev_by_country = df.groupby("country")["revenue"].sum().reset_index()
-print("\nRevenue by Country:")
-print(rev_by_country)
+col1, col2, col3 = st.columns(3)
+col1.metric("Total Revenue", f"₹{total_revenue:,.0f}")
+col2.metric("Total Orders", total_orders)
+col3.metric("Countries", total_countries)
 
-# Top products by revenue
-rev_by_product = df.groupby("product")["revenue"].sum().reset_index().sort_values(by="revenue", ascending=False)
-print("\nRevenue by Product:")
-print(rev_by_product)
+st.markdown("---")
 
-# 3) CREATE OUTPUTS FOLDER IF NOT EXISTS
-os.makedirs("outputs", exist_ok=True)
+# Filter by country
+all_countries = sorted(df["country"].unique().tolist())
+selected_countries = st.multiselect(
+    "Filter by Country",
+    options=all_countries,
+    default=all_countries,
+)
 
-# 4) PLOTS
+filtered_df = df[df["country"].isin(selected_countries)]
 
-# Revenue by month (line chart)
-plt.figure()
-plt.plot(rev_by_month["year_month"], rev_by_month["revenue"], marker="o")
-plt.title("Revenue by Month")
-plt.xlabel("Month")
-plt.ylabel("Revenue")
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.savefig("outputs/revenue_by_month.png")
+# Revenue by Month
+rev_by_month = (
+    filtered_df.groupby("year_month")["revenue"]
+    .sum()
+    .reset_index()
+    .sort_values("year_month")
+)
 
-# Revenue by country (bar chart)
-plt.figure()
-plt.bar(rev_by_country["country"], rev_by_country["revenue"])
-plt.title("Revenue by Country")
-plt.xlabel("Country")
-plt.ylabel("Revenue")
-plt.tight_layout()
-plt.savefig("outputs/revenue_by_country.png")
+# Revenue by Country
+rev_by_country = (
+    filtered_df.groupby("country")["revenue"]
+    .sum()
+    .reset_index()
+    .sort_values("revenue", ascending=False)
+)
 
-# Revenue by product (bar chart)
-plt.figure()
-plt.bar(rev_by_product["product"], rev_by_product["revenue"])
-plt.title("Revenue by Product")
-plt.xlabel("Product")
-plt.ylabel("Revenue")
-plt.tight_layout()
-plt.savefig("outputs/revenue_by_product.png")
+# Revenue by Product
+rev_by_product = (
+    filtered_df.groupby("product")["revenue"]
+    .sum()
+    .reset_index()
+    .sort_values("revenue", ascending=False)
+)
 
-print("\nCharts saved in the 'outputs' folder:")
-print(" - outputs/revenue_by_month.png")
-print(" - outputs/revenue_by_country.png")
-print(" - outputs/revenue_by_product.png")
+# ---------- 3) SHOW CHARTS ----------
+
+st.subheader("📆 Revenue by Month")
+st.line_chart(rev_by_month.set_index("year_month")["revenue"])
+
+st.subheader("🌍 Revenue by Country")
+st.bar_chart(rev_by_country.set_index("country")["revenue"])
+
+st.subheader("🛍️ Revenue by Product")
+st.bar_chart(rev_by_product.set_index("product")["revenue"])
+
+st.markdown("---")
+st.caption("Sample data dashboard for portfolio / learning purposes.")
