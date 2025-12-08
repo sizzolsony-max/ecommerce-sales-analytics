@@ -81,7 +81,7 @@ http://localhost:8501
 ## 🌐 Live Deployment
 
 🔗 **Live App:**  
-👉 https://YOUR-STREAMLIT-LINK-HERE
+👉 https://ecommerce-sales-analytics-dw3a9bmlsfadmzpwcqucys.streamlit.app
 
 🔗 **GitHub Repository:**  
 👉 https://github.com/sizzolsony-max/ecommerce-sales-analytics
