@@ -86,24 +86,14 @@ http://localhost:8501
 🔗 **GitHub Repository:**  
 👉 https://github.com/sizzolsony-max/ecommerce-sales-analytics
 
-> Replace `YOUR-STREAMLIT-LINK-HERE` with your real app link after deployment.
-
----
-
-## 📌 Future Enhancements
-
-🔹 Upload CSV option for custom data  
-🔹 Add customer segmentation with RFM metrics  
-🔹 Add marketing recommendations based on revenue patterns  
-🔹 Export filtered insights to PDF / Excel
 
 ---
 
 ## 👨‍💻 Author
 
-**Sizol Soni — Python & Data Analyst Developer**  
+**Sijol Soni sahoo — Python & Data Analyst Developer**  
 📌 Passionate about analytics, visualization, and building real-world applications
 
 ---
 
-⭐ *If you like this project, please give the repository a star — it helps and motivates!*  
+
