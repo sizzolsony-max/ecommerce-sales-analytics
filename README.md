@@ -1,42 +1,109 @@
-# E-commerce Sales Analytics (Python)
+# 📊 E-Commerce Sales Analytics Dashboard (Python + Streamlit)
 
-This project is a simple **E-commerce Sales Analysis** built with Python.  
-It uses a small sample dataset to show how a data analyst can:
-
-- Calculate **revenue** from orders  
-- Analyze revenue by **month**, **country**, and **product**
-- Create **visual charts** for business insights
+This project is an **interactive sales analytics dashboard** built using **Python and Streamlit**.  
+It visualizes key business insights such as **revenue trends by month, country, and product**, helping businesses understand performance and make data-driven decisions.
 
 ---
 
-## 🔍 What the script does
+## 🚀 Features
 
-File: `analysis.py`
+✔ Real-time sales KPIs (Total Revenue, Orders, Countries)  
+✔ Dynamic **country filter** for custom insights  
+✔ Visual charts for:
+- Revenue by Month  
+- Revenue by Country  
+- Revenue by Product  
 
-1. Creates a sample dataset with:
-   - `order_id`
-   - `order_date`
-   - `country`
-   - `product`
-   - `quantity`
-   - `price_per_unit`
-2. Converts `order_date` to a proper date and extracts `year_month`
-3. Calculates a new column:  
-   `revenue = quantity * price_per_unit`
-4. Computes:
-   - Revenue by **month**
-   - Revenue by **country**
-   - Revenue by **product**
-5. Saves 3 charts to the `outputs/` folder:
-   - `revenue_by_month.png`
-   - `revenue_by_country.png`
-   - `revenue_by_product.png`
+✔ Fully deployed and accessible online through Streamlit Cloud  
+✔ Clean and beginner-friendly code for learning and portfolio use
 
 ---
 
-## 📊 How to Run
+## 🧠 Business Problem Solved
 
-1. Install dependencies:
+E-commerce businesses generate large volumes of sales data, but understanding it can be difficult.  
+This dashboard converts raw data into **actionable insights**, answering questions like:
+
+| Business Question | Insight Provided |
+|------------------|------------------|
+| Which month generates the most revenue? | Trend chart of monthly revenue |
+| Which countries perform best? | Country-wise revenue breakdown |
+| Which products drive sales? | Product-wise revenue comparison |
+| How does filtering affect performance? | Dynamic dashboard updates |
+
+---
+
+## 📂 Project Structure
+
+```text
+ecommerce-sales-analytics/
+├─ app.py               # Main Streamlit dashboard
+├─ requirements.txt     # Project dependencies
+├─ README.md            # Documentation
+└─ outputs/             # (Optional) Images and saved charts from the script version
+```
+
+---
+
+## 🛠 Tech Stack
+
+| Category | Tools |
+|----------|-------|
+| Programming | Python |
+| Dashboard Web Framework | Streamlit |
+| Data Analysis | Pandas |
+| Visualization | Streamlit Charts |
+
+---
+
+## ▶️ How to Run Locally
+
+Install dependencies:
 
 ```bash
-pip install pandas matplotlib
+pip install -r requirements.txt
+```
+
+Run the Streamlit dashboard:
+
+```bash
+streamlit run app.py
+```
+
+The dashboard will open automatically in your browser at:
+
+```
+http://localhost:8501
+```
+
+---
+
+## 🌐 Live Deployment
+
+🔗 **Live App:**  
+👉 https://YOUR-STREAMLIT-LINK-HERE
+
+🔗 **GitHub Repository:**  
+👉 https://github.com/sizzolsony-max/ecommerce-sales-analytics
+
+> Replace `YOUR-STREAMLIT-LINK-HERE` with your real app link after deployment.
+
+---
+
+## 📌 Future Enhancements
+
+🔹 Upload CSV option for custom data  
+🔹 Add customer segmentation with RFM metrics  
+🔹 Add marketing recommendations based on revenue patterns  
+🔹 Export filtered insights to PDF / Excel
+
+---
+
+## 👨‍💻 Author
+
+**Sizol Soni — Python & Data Analyst Developer**  
+📌 Passionate about analytics, visualization, and building real-world applications
+
+---
+
+⭐ *If you like this project, please give the repository a star — it helps and motivates!*  
